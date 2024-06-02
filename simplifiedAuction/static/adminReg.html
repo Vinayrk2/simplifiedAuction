@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Player Register</title>
+    <link rel="shortcut icon" href="../../media/Designer.png" type="image/x-icon">
+    <style>
+        #links>a{
+            display: block;
+        }
+        a{
+            text-decoration:none;
+        }
+        *{
+            margin: 0;
+            padding: 0; 
+        }
+        
+        html,body{
+            font-family: 'Ubuntu',sans-serif;
+            height: 100%;
+            background-color: rgb(3, 3, 76);
+        }
+        .navs:link{
+            text-decoration: none;
+            color: red;
+            
+        }
+        .icons{
+            color: white;
+            margin-left: 25px;
+        }
+        
+        .tabs{
+            color:navy;
+            font-weight: bold;
+            margin-right: 105px;
+            font-size: 20px;
+        }
+        
+        body{
+            overflow-x: hidden;
+        }
+        
+        .show_images{
+            margin-top: 50px;
+        }
+        
+        .Prices_section{
+            display: block;
+            align-content: center;margin-left: 120px;
+        
+        }
+        
+        .mynav li a{
+            text-decoration: none;
+            background-color: rgb(3, 3, 76);
+            color: white;
+            font-weight: bold;
+            padding: 8px 20px;
+            margin-top: 15px;
+            display: block;
+        
+        }
+        .upload{
+            width: 100px;
+            position: relative;
+            margin: auto;
+        }
+        
+        .upload img{
+            border-radius: 50%;
+            border: 6px solid #eaeaea;
+        }
+        
+        .upload .round{
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            background: #00B4FF;
+            width: 32px;
+            height: 32px;
+            line-height: 33px;
+            text-align: center;
+            border-radius: 50%;
+            overflow: hidden;
+        }
+        
+        .upload .round input[type='file']{
+            position: absolute;
+            transform: scale(2);
+            opacity: 0;
+        }
+        
+        input[type=file]::-webkit-file-upload-button{
+            cursor: pointer;
+        
+        }
+        
+    </style>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
+<!-- <link rel="stylesheet" href="style.css"> -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+    integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+</head>
+<body>
+
+    <div class="" style="background-color: rgb(3, 3, 76);">
+
+        {% include "header.html" %}
+
+        <div class="container d-flex justify-content-center my-5">
+            <div class="card" style="width: 24rem;background-color: skyblue;border-radius: 20px;height: 35rem;">
+                <h2 class="text-center my-3" style="color: rgb(3, 3, 76);font-weight: bold;">Bid <br> Players</h2>
+                <form action="/adminreg" method="post">
+                    {% csrf_token %}
+                <div class="card-body">
+                       <div class="row my-3">
+                           <div class="col-sm">
+                             <input type="text" name="adminId" id="" class="form-control form-control-lg text-center" style="border-radius: 15px;" placeholder="Admin ID">
+                           </div>
+                        </div>
+                        <div class="row my-2">
+                            <div class="col-sm">
+                                <input type="email" class="form-control form-control-lg text-center" style="border-radius: 15px;"
+                                name="email" id="email" placeholder="Email">
+                            </div>
+                        </div>
+                        
+                        <div class="row my-2">
+                            <div class="col-sm">
+                                <input type="password" class="form-control form-control-lg text-center my-2" style="border-radius: 15px;"
+                                name="password" id="" placeholder="Password">
+                            </div>
+                        </div>
+
+                        <div class="row my-2">
+                            <div class="col-sm">
+                                <input type="text" class="form-control form-control-lg text-center my-2" style="border-radius: 15px;"
+                                name="name" id="" placeholder="Admin Name">
+                            </div>
+                        </div>
+                       <hr>
+
+                       <div class="my-5">
+                        <button class="btn mx-auto d-block" type="submit" style="background-color: rgb(3, 3, 76);color: white;">Register</button>
+                        
+                       </div>      
+                </form> 
+                
+
+            </div>
+            
+        </div>
+
+
+    </div>
+    <div class="">
+
+        <footer class="text-center text-lg-start" style="background-color: rgb(3, 3, 76);">
+            <div class="container d-flex justify-content-center py-5">
+                <button type="button" class="btn btn-primary btn-lg btn-floating mx-2"
+                    style="background-color: #54456b;">
+                    <i class="fa fa-facebook-f"></i>
+                </button>
+                <button type="button" class="btn btn-primary btn-lg btn-floating mx-2"
+                    style="background-color: #54456b;">
+                    <i class="fa fa-youtube"></i>
+                </button>
+                <button type="button" class="btn btn-primary btn-lg btn-floating mx-2"
+                    style="background-color: #54456b;">
+                    <i class="fa fa-instagram"></i>
+                </button>
+                <button type="button" class="btn btn-primary btn-lg btn-floating mx-2"
+                    style="background-color: #54456b;">
+                    <i class="fa fa-twitter"></i>
+                </button>
+            </div>
+
+            <!-- Copyright -->
+            <div class="text-center text-white p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+                © 2020 Copyright:
+                <a class="text-white" href="https://mdbootstrap.com/">BidPlayers.com</a>
+            </div>
+            <!-- Copyright -->
+        </footer>
+
+    </div>
+
+</body>
+</html>

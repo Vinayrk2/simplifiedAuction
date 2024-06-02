@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Auction</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+        integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+</head>
+<style>
+    .upload{
+        width: 100px;
+        position: relative;
+        margin: auto;
+    }
+    
+    .upload img{
+        border-radius: 50%;
+        border: 6px solid #eaeaea;
+    }
+    
+    .upload .round{
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        background: #00B4FF;
+        width: 32px;
+        height: 32px;
+        line-height: 33px;
+        text-align: center;
+        border-radius: 50%;
+        overflow: hidden;
+    }
+    
+    .upload .round input[type='file']{
+        position: absolute;
+        transform: scale(2);
+        opacity: 0;
+    }
+    
+    input[type=file]::-webkit-file-upload-button{
+        cursor: pointer;
+    
+    }
+    *{
+        margin: 0;
+        padding: 0; 
+    }
+    
+    html,body{
+        font-family: 'Ubuntu',sans-serif;
+        height: 100%;
+        background-color: rgb(3, 3, 76);
+    }
+    .navs:link{
+        text-decoration: none;
+        color: red;
+        
+    }
+    .icons{
+        color: white;
+        margin-left: 25px;
+    }
+    
+    .tabs{
+        color:navy;
+        font-weight: bold;
+        margin-right: 105px;
+        font-size: 20px;
+    }
+    
+    body{
+        overflow-x: hidden;
+    }
+    
+    .show_images{
+        margin-top: 50px;
+    }
+    
+    .Prices_section{
+        display: block;
+        align-content: center;margin-left: 120px;
+    
+    }
+    
+    .mynav li a{
+        text-decoration: none;
+        background-color: rgb(3, 3, 76);
+        color: white;
+        font-weight: bold;
+        padding: 8px 20px;
+        margin-top: 15px;
+        display: block;
+    
+    }
+</style>
+<body>
+    <div class="container-fluid d-flex p-0" style="height:830px">
+        <div id="SideBar" class="d-flex flex-column p-5 h-100" style="background-color: white;">
+            <h2 class="text-center " style="color: rgb(3, 3, 76);font-weight: bold;">Bid <br> Players</h2>
+            <hr>
+            <div style="display: flex;align-items: center;justify-content: center;">
+                <ul class="mynav nav nav-pills flex-column mb-auto my-4" style="">
+                    <li class="nav-item mb-1">
+                        <a href="" class="active  text-center btn" onclick="Create_Auction()">
+                            Create Auction
+                        </a>
+                    </li>
+                    <li class="nav-item mb-1">
+                        <a href="" class="active  text-center" onclick="Add_Teams()">
+                            Add Teams
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="" class="active  text-center" onclick="Add_Players">
+                            Add Player
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- <div class="bg-light flex-fill ">
+    <div class="p-2 d-md-none d-flex text-white" style="background-color:white">
+        <a href="#" class="text-white" data-bs-toggle="offcanvas" data-bs-target="#SideBar">
+            <i class="fa-solid fa-bars"></i>
+        </a>
+        <span class="ms-3">Bid Player</span>
+    
+    </div> -->
+        <div class="d-flex justify-content-between my-4 mx-2">
+            <div class="container" style="width: 600px;height: 100%;background-color: white;">
+  
+                    <h4 class="text-center my-2" style="font-size:25px;font-weight:bold">Add Player Section</h4>
+
+                    <hr>
+
+                <div class="d-flex justify-content-start my-5 mx-3">
+                    <fieldset  style="border:3px solid rgb(3, 3, 76); border-radius:8px;width: 100%;">
+                        <legend class="text-center">Fetch Player Details</legend>
+                        <!-- <div class="row">
+                            <div class="col-sm-6">   
+                                <label for="Admin_ID" class="" style="color: rgb(3, 3, 76);font-weight: bold;">Admin ID :</label> 
+                            </div>
+                            <div class="col-sm-6">
+                                <input type="text" name="Admin_ID" id="Admin_ID" class="" style="border-radius: 25px;background-color: lightgray;">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">     
+                                <label for="Admin_ID" class="" style="color: rgb(3, 3, 76);font-weight: bold;">Admin ID :</label>
+                            </div>
+                            <div class="col-sm-6">
+                                <input type="text" name="Admin_ID" id="Admin_ID" class="" style="border-radius: 25px;background-color: lightgray;">
+                            </div>
+                        </div> -->
+                        <div class="container my-2">
+                            
+                            <div class="row my-2">
+                                <div class="col-sm-4">   
+                                    <label for="Admin_ID" class="form-label" style="color: rgb(3, 3, 76);font-weight: bold;font-size:20px">Player ID :</label> 
+                                </div>
+                                <div class="col-sm">
+                                    <input type="text" name="Admin_ID" id="Admin_ID" class="text-center form-control" style="border-radius: 25px;background-color: lightgray;">
+                                </div>
+                                
+                            </div>
+                            <button class="btn d-block mx-auto my-4" style="background-color: rgb(3, 3, 76);color: white;font-weight: bold;" type="submit">Fetch Player Details</button>
+                        </div>
+                    </fieldset>
+                </div>
+
+                
+
+    </div>
+    </div>
+
+
+
+
+</body>
+
+</html>

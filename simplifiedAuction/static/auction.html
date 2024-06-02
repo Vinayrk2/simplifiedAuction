@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auction Page</title>
+</head>
+<body>
+    <form method="post">
+        <input type="text" name="bid" id="bid">
+        <input type="hidden" name="team" value="team">
+        <button> Submit </button>
+    </form>
+
+    <script>
+        const url = `ws://${window.location.host}/ws/auction`;
+        const form = document.getElementsByTagName("form")[0]
+        const ws = new WebSocket(url)
+
+        form.addEventListener('submit',(e)=>{
+            e.preventDefault()
+            
+            ws.send(JSON.stringify({'sender':"team1", 'amount':parseInt(document.getElementById('bid').value)}))
+        })
+
+        ws.addEventListener('message',  (msg)=>{
+            console.log(msg)
+        })
+
+    </script>
+</body>
+</html>

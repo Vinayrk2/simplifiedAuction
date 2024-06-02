@@ -1,0 +1,338 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <link rel="shortcut icon" href="../../media/Designer.png" type="image/x-icon">
+    <style>
+        #links>a{
+            display: block;
+        }
+        *{
+            margin: 0;
+            padding: 0; 
+        }
+        
+        html,body{
+            font-family: 'Ubuntu',sans-serif;
+            height: 100%;
+            background-color: rgb(3, 3, 76);
+        }
+        .navs:link{
+            text-decoration: none;
+            color: red;
+            
+        }
+        .icons{
+            color: white;
+            margin-left: 25px;
+        }
+        
+        .tabs{
+            color:navy;
+            font-weight: bold;
+            margin-right: 105px;
+            font-size: 20px;
+        }
+        
+        body{
+            overflow-x: hidden;
+        }
+        
+        .show_images{
+            margin-top: 50px;
+        }
+        
+        .Prices_section{
+            display: block;
+            align-content: center;margin-left: 120px;
+        
+        }
+        
+        .mynav li a{
+            text-decoration: none;
+            background-color: rgb(3, 3, 76);
+            color: white;
+            font-weight: bold;
+            padding: 8px 20px;
+            margin-top: 15px;
+            display: block;
+        
+        }
+        
+       
+    </style>
+
+</head>
+<body>
+
+    {% if  request.session.id %} 
+<script>
+
+function showalert(){
+    alert(' Login Successfull !! ')
+}
+</script>
+   {% endif %}
+
+   
+    {% comment %} <div id="links">
+        <a href="register?reg=2"> Register </a>
+        <a href="playerregister">Player Registration</a>
+        <a href="adminreg"> Admin Registration </a>
+        <a href="team/login">Team Login</a>
+        <a href="player/login">Player Login</a>
+        <a href="auctionadmin/login">Auction Admin Login</a>
+        <a href="auctionadmin">Auction Admin</a>
+        <a href="adminhome"> Admin Home</a>
+        <a href="playerprofile">Player Profile</a>
+        <a href="teamprofile">Team home</a>
+        <a href="logout"> Logout </a>
+    </div> {% endcomment %}
+    <div class="" style="background-color: rgb(3, 3, 76);">
+
+        {% include "header.html" %}
+
+        <div class="row my-5">
+            <div class="col-sm" style="display: flex;align-items: center;margin-left: 55px;">
+                <h2
+                    style="color:white;font-size: 40px;font-weight: bold;-webkit-text-stroke-width: 1px;-webkit-text-stroke-color: rgb(6, 91, 183);">
+                    Bid Players is a Live <br> Auction Application</h2>
+
+            </div>
+            <div class="col-sm" style="background-color:rgb(6, 91, 183);border-radius:50%">
+                    {% load static %}
+                <img src="static/imgs/home_menu.png" alt="My image" width="700px">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm" style="margin-top: -250px;display: block;">
+                <button class="btn" onclick="checkfunc()"
+                    style="margin-left: 50px;color: white;background-color: rgb(6, 91, 183);font-weight: bold;font-size: 25px;border-radius: 25%;">Create a
+                    Auction</button>
+            </div>
+        </div>
+
+
+        <!--       About Us         -->
+
+        <div id="about_us" class="my-4">
+
+
+
+            <div class="row my-5">
+                <div class="col-sm">
+                
+                        <img width="700px" src="static/imgs/auction_img.png" alt="" style="background-color: white;margin-left:50px;border-radius: 5%;">
+
+                </div>
+                <div class="col-sm">
+                    
+                    <h1 class="text-center my-5 text-light">Multiple Sports Auction</h1><br>
+                    <p class="text-center" style="color: white;font-size: 25px;">Various sports player auction on a
+                        single
+                        software <br>
+                    <p class="text-center" style="color: green;font-weight: bold;font-size: 25px;">Cricket, Football,
+                        Badminton, Volleyball, Tennis and many more.</p>
+                    </p>
+
+                </div>
+
+            </div>
+            <div class="row show_images">
+                <div class="col-sm" style="margin-top: 200px;">
+                    <h1 class="text-center my-5 text-light">Player Registration Form </h1><br>
+                    <p class="text-center" style="color: white;font-size: 35px;">Players can register themselves Online
+                        for
+                        <b style="color: green;">submitting their names in Auction...</b>
+                    </p>
+
+
+
+                </div>
+                <div class="col-sm">
+                    <!-- <img width="700px" src="20240208_004054-removebg-preview.png" alt="" style="background-color: white;margin-left:50px;border-radius: 5%;"> -->
+                    <img width="700px" src="static/imgs/registeration_form.png" height="1500px" alt=""
+                        style="background-color: white;border-radius: 5%;">
+                        
+                </div>
+
+            </div>
+
+            <div class="row show_images my-5">
+                <div class="col-sm">
+                    <img width="750px" height="500px" src="static/imgs/auction_display.png" alt=""
+                        style="background-color: white;margin-left:50px;border-radius: 5%;border:2px solid white">
+
+                </div>
+                <div class="col-sm">
+                    <!-- <img width="700px" src="20240208_004054-removebg-preview.png" alt="" style="background-color: white;margin-left:50px;border-radius: 5%;"> -->
+                    <h1 class="text-center my-5 text-light">Live Auction</h1><br>
+                    <p class="text-center" style="color: white;font-size: 35px;"><b style="color: green;">Live
+                            Auction</b>
+                        can be seen by anyone <br>on the website </p>
+                </div>
+
+            </div>
+
+            <div class="row my-5">
+                <div class="col-sm" style="margin-top: 200px;">
+                    <h1 class="text-center my-5 text-light">Player Bidding Interface</h1><br>
+                    <p class="text-center" style="color: white;font-size: 35px;">This Interface will show details of
+                        player
+                        and<b style="color: green;"> teams will start bidding on that player. </b></p>
+
+
+
+                </div>
+                <div class="col-sm">
+                    <!-- <img width="700px" src="20240208_004054-removebg-preview.png" alt="" style="background-color: white;margin-left:50px;border-radius: 5%;"> -->
+                    <img width="700px" src={% static "player-registration-form.jpg"%} alt=""
+                        style="background-color: white;border-radius: 5%;">
+                </div>
+
+            </div>
+
+            <div class="" style="background-color: white;" id="price_section">
+                <h2 class="my-5 text-center">Our Prices</h2>
+                <div class="Prices_section">
+                    <!-- <div class="row show_images">
+                    <div class="col-sm">
+                        <h2 class="my-5">Our Prices</h2>
+                    </div>
+                    <div class="col-sm"></div>
+                </div> -->
+
+                    <div class="row">
+                        <div class="col-sm">
+                            <div class="card" style="width: 18rem;">
+
+                                <div class="card-body text-center">
+                                    <h5 class="card-title">Up to</h5>
+                                    <h1>2</h1>
+                                    <h2>Teams</h2>
+                                    <a href="#" class="btn btn d-block"
+                                        style="background-color:rgb(0, 183, 255);text-align: center;"><b>Free</b></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm">
+                            <div class="card" style="width: 18rem;">
+
+                                <div class="card-body text-center">
+                                    <h5 class="card-title">Up to</h5>
+                                    <h1>4</h1>
+                                    <h2>Teams</h2>
+                                    <a href="#" class="btn btn d-block"
+                                        style="background-color:rgb(0, 183, 255);"><b>Free</b></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm">
+                            <div class="card" style="width: 18rem;">
+
+                                <div class="card-body text-center">
+                                    <h5 class="card-title">Up to</h5>
+                                    <h1>8</h1>
+                                    <h2>Teams</h2>
+                                    <a href="#" class="btn btn d-block"
+                                        style="background-color:rgb(0, 183, 255);"><b>Free</b></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row my-5">
+                        <div class="col-sm">
+                            <div class="card" style="width: 18rem;">
+
+                                <div class="card-body text-center">
+                                    <h5 class="card-title">Up to</h5>
+                                    <h1>12</h1>
+                                    <h2>Teams</h2>
+                                    <a href="#" class="btn btn d-block"
+                                        style="background-color:rgb(0, 183, 255);"><b>Free</b></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm">
+                            <div class="card" style="width: 18rem;">
+
+                                <div class="card-body text-center">
+                                    <h5 class="card-title">Up to</h5>
+                                    <h1>16</h1>
+                                    <h2>Teams</h2>
+                                    <a href="#" class="btn btn d-block"
+                                        style="background-color:rgb(0, 183, 255);"><b>Free</b></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm">
+                            <div class="card" style="width: 18rem;">
+
+                                <div class="card-body text-center">
+                                    <h5 class="card-title">Up to</h5>
+                                    <h1>24</h1>
+                                    <h2>Teams</h2>
+                                    <a href="#" class="btn btn d-block"
+                                        style="background-color:rgb(0, 183, 255);"><b>Free</b></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
+    <div class="">
+
+        <footer class="text-center text-lg-start" style="background-color: rgb(3, 3, 76);">
+            <div class="container d-flex justify-content-center py-5">
+                <button type="button" class="btn btn-primary btn-lg btn-floating mx-2"
+                    style="background-color: #54456b;">
+                    <i class="fa fa-facebook-f"></i>
+                </button>
+                <button type="button" class="btn btn-primary btn-lg btn-floating mx-2"
+                    style="background-color: #54456b;">
+                    <i class="fa fa-youtube"></i>
+                </button>
+                <button type="button" class="btn btn-primary btn-lg btn-floating mx-2"
+                    style="background-color: #54456b;">
+                    <i class="fa fa-instagram"></i>
+                </button>
+                <button type="button" class="btn btn-primary btn-lg btn-floating mx-2"
+                    style="background-color: #54456b;">
+                    <i class="fa fa-twitter"></i>
+                </button>
+            </div>
+
+            <!-- Copyright -->
+            <div class="text-center text-white p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+                © 2020 Copyright:
+                <a class="text-white" href="https://mdbootstrap.com/">BidPlayers.com</a>
+            </div>
+            <!-- Copyright -->
+        </footer>
+
+    </div>
+
+    <script>
+        const user = {%if 'user' in request.session %}{{ request.session.user}}{% else %} '' {% endif %}
+
+        function checkfunc(){
+            if(user == 1 || user == ''){
+                window.location.assign("auctionadmin/login")
+            }
+            else{
+                alert("Only Auction Admin Has Access")
+            }
+        }
+
+    </script>
+</body>
+</html>
