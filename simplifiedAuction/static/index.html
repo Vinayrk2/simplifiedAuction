@@ -321,18 +321,5 @@ function showalert(){
 
     </div>
 
-    <script>
-        const user = {%if 'user' in request.session %}{{ request.session.user}}{% else %} '' {% endif %}
-
-        function checkfunc(){
-            if(user == 1 || user == ''){
-                window.location.assign("auctionadmin/login")
-            }
-            else{
-                alert("Only Auction Admin Has Access")
-            }
-        }
-
-    </script>
 </body>
 </html>
