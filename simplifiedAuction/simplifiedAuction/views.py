@@ -16,7 +16,16 @@ def login(request):
     else:
         return HttpResponse(content=request.POST["id"])
 
-def createAuction():
+def createAuction(request):
+    return render(request, "create_auction.html", {})
+
+def addPlayer(request):
+    return render(request, "create_auction.html", {})
+
+def addTeam(request):
+    return render(request, "create_auction.html", {})
+
+def myAuctions(request):
     return render(request, "create_auction.html", {})
 
 def register(request):
