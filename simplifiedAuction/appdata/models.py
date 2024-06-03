@@ -4,16 +4,16 @@ import numpy as np
 
 # Create your models here.
 class Auction_admin(models.Model):
-    name = models.CharField(max_length=40)
+    username = models.CharField(max_length=40)
     # date = models.DateField()
-    username = models.CharField(max_length=50)
+    email = models.CharField(max_length=100, null=True)
     password = models.CharField(max_length=128)
 
     def save(self):
         self.password = make_password(self.password)
         super().save()
     def __str__(self):
-        return self.name
+        return self.username
     
     def getAdminData(self):
         return self
@@ -34,6 +34,9 @@ class Auction(models.Model):
         self.status = 1
     def endAuction(self):
         self.status = 2
+    @staticmethod
+    def getAll():
+        return Auction.objects.all()
 
 class AuctionPlayer(models.Model):
     auction = models.ForeignKey('Auction', on_delete=models.CASCADE)

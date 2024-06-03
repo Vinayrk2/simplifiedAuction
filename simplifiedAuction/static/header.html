@@ -79,18 +79,18 @@ integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQV
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                {% if 'user' not in request.session %}
+                {% if 'username' not in request.session %}
                 <li class="nav-item">
-                    <a class="nav-link active text-light bg-primary mx-1" aria-current="page" href="playerregister"
+                    <a class="nav-link active text-light bg-primary mx-1" aria-current="page" href="/register"
                         style="font-weight: bold;">Register</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active text-light bg-primary mx-1" aria-current="page" href="player/login"
+                    <a class="nav-link active text-light bg-primary mx-1" aria-current="page" href="/login"
                         style="font-weight: bold;">Login</a>
                 </li>
                 {% endif %}
 
-                {% if 'user' in request.session %}
+                {% if 'username' in request.session %}
                 <li class="nav-item">
                     <a class="nav-link active text-light bg-danger mx-1" aria-current="page" href="logout"
                         style="font-weight: bold;">Log Out</a>
@@ -114,25 +114,18 @@ integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQV
                 <li class="nav-item">
                     <a class="nav-link active tabs" aria-current="page" href="/">Home</a>
                 </li>
-            {% if 'user' in request.session and request.session.user == 3 %}
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                     <a class="nav-link tabs" href="playerprofile">Player Profile</a>
                 </li>
-                {% endif %}
-         
-            {% if 'user' in request.session and request.session.user == 2 %}
                 <li class="nav-item">
-                    <a class="nav-link  tabs" href="teamprofile">Team Profile</a>
+                    <a class="nav-link  tabs" href="teamprofile">Team Profile</a> -->
                 </li>
-            {% endif %}
-            {% if 'user' not in request.session or request.session.user != 1 %}
             <li class="nav-item">
-                <a class="nav-link  tabs" href="allauctions">Live Auctions</a>
+                <a class="nav-link  tabs" href="allauctions">All Auctions</a>
             </li>
-            {% endif %}
-            {% if 'user' in request.session and request.session.user == 1 %}
+            {% if 'username' in request.session %}
             <li class="nav-item">
-                <a class="nav-link  tabs" href="/adminhome">Auction Home</a>
+                <a class="nav-link  tabs" href="allAuction">Auction Home</a>
             </li>
             {% endif %}
         </div>

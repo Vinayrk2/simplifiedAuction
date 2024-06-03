@@ -25,10 +25,11 @@ urlpatterns = [
     path("login", views.login),
     path("register", views.register),
     path("auction/<auctionid>/dashboard", views.dashboard),
-    path("auction/<auctionid>/live", views.auction),
+    path("auction/<auctionid>/live", views.liveAuction),
     path("auction/<auctionid>/final", views.finalAuction),
     path("auction/createauction", views.createAuction),
     path("auction/addteam", views.addPlayer),
     path("auction/addplayer", views.addTeam),
     path("<adminid>/myauctions", views.myAuctions),
+    path("allauctions", views.allAuctions),
 ]

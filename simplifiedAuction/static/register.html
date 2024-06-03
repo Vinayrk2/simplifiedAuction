@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Page</title>
+    <title>Register Page</title>
+    <link rel="shortcut icon" href="../../media/Designer.png" type="image/x-icon">
     <link rel="shortcut icon" href="../../media/Designer.png" type="image/x-icon">
     <style>
         #links>a{
@@ -104,64 +105,120 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
     crossorigin="anonymous"></script>
-<!-- <link rel="stylesheet" href="style.css"> -->
+<link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
     integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-
+    {% csrf_token %}
 </head>
 <body>
+    {% comment %} <h1>Register Here</h1>
 
-    <div class="" style="background-color: rgb(3, 3, 76);">
 
-        {% include "header.html" %}
+    <h2 style="text-align: center;"> New Team Registration </h2>
+    <form action="register" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        Name : <input type="text" name="name" id=""><br>
+        email : <input type="text" name="email" id=""><br>
+        UserId : <input type="text" name="teamId" id=""><br>
+        password : <input type="text" name="password" id=""><br>
+        select team logo : <input type="file" name="logo" id="">
+        Add Captain : <input type="text" name="captainId" id="" onchange="getCaptain(this.value)" required autocomplete=false>
+        
+        <button disabled id="submit"> Submit </button>
+   
+   
+    </form> {% endcomment %}
+    {% include "header.html" %}
+
         <div class="container d-flex justify-content-center my-5">
-            <div class="card" style="width: 20rem;background-color: skyblue;border-radius: 20px;height: auto;">
+            <div class="card" style="width: 30rem;background-color: skyblue;border-radius: 20px;">
                 <h2 class="text-center my-3" style="color: rgb(3, 3, 76);font-weight: bold;">Bid <br> Players</h2>
-                <h5 class="text-center text-uppercase">{{ user }} Login</h5>
-                <form action="/login" method="post">
+                <form action="register" method="post" enctype="multipart/form-data">
                     {% csrf_token %}
-                <div class="card-body ">
+                    {% comment %}
+                <div class="card-body">
+                    <div class="upload">
+                        <i class="fa fa-users" aria-hidden="true" style="font-size: 120px;"></i>
+                        <div class="round">
+                            <input type="file" name="logo" id="">
+                            <i class="fa fa-camera" style="color: #fff;"></i>
+                        </div>
+                    </div>
+                    <div class="my-5">
+
                         <div class="row my-2">
                             <div class="col-sm">
-                                <input type="email" class="form-control form-control-lg text-center" style="border-radius: 15px;"
+                                <input type="text" class="form-control text-center" style="border-radius: 15px;"
+                                    placeholder="Team Name" name="name" id="name">
+                            </div>
+                        </div>
+                        
+                        <div class="row my-2">
+                            <div class="col-sm">
+                                <input type="text" class="form-control text-center" style="border-radius: 15px;"
+                                    placeholder="Team ID" name="teamId" required>
+                            </div>
+                        </div>
+
+                        <div class="row my-2">
+                            <div class="col-sm">
+                                <input type="email" class="form-control text-center" style="border-radius: 15px;"
                                 name="email" id="email" placeholder="Email">
                             </div>
                         </div>
                         
                         <div class="row my-2">
                             <div class="col-sm">
-                                <input type="password" class="form-control form-control-lg text-center my-2" style="border-radius: 15px;"
+                                <input type="password" class="form-control text-center" style="border-radius: 15px;"
                                 name="password" id="" placeholder="Password">
                             </div>
                         </div>
-                       <hr>
 
-                       <!-- <div class="my-5">
-                        <button class="btn mx-auto d-block" type="submit" style="background-color: rgb(3, 3, 76);color: white;">Log In</button>
-                        <a href="/team/login"><h6 class="text-center my-3">Login As Team ? </h6></a>
-                        <a href="/auctionadmin/login"><h6 class="text-center my-3">Login As Admin ? </h6></a>
-                        <a href="/player/login"><h6 class="text-center my-3">Login As Player ? </h6></a>
-                    </div> -->
-                    <button class="btn btn-primary w-100" > Submit </button>
-                    <a href=""><h6 class="text-center my-3">Forget Password</h6></a>
+                        <div class="row my-2">
+                            <div class="col-sm">
+                                <input type="text" class="form-control text-center" style="border-radius: 15px;"
+                                name="captainId" id="" placeholder="Captain ID" onchange="getCaptain(this.value)" required autocomplete=false>
+                            </div>
+                        </div>
+                        <hr>
+                        {% endcomment %}
 
-                       <div class="my-5">     
-                       </div>
-                       <!--
-                       {% if user == "player" %}
-                       <input type="hidden" name="user" value="3">
-                       {% endif %}
-           
-                       {% if user == "team" %}
-                       <input type="hidden" name="user" value="2">
-                       {% endif %}
-           
-                       {% if user == "auctionadmin" %}
-                       <input type="hidden" name="user" value="1">
-                       {% endif %}
-                       -->       
+                       <div class="row my-2">
+                        <div class="col-sm">
+                            <input type="text" class="form-control text-center" style="border-radius: 15px;"
+                            name="username" id="" placeholder="Email id" required autocomplete=false>
+                        </div>
+                    </div>
+                    <hr>
+                       <div class="row my-2">
+                        <div class="col-sm">
+                            <input type="email" class="form-control text-center" style="border-radius: 15px;"
+                            name="email" id="" placeholder="Email id" required autocomplete=false>
+                        </div>
+                    </div>
+                   <hr>
+
+                   <div class="row my-2">
+                    <div class="col-sm">
+                        <input type="password" class="form-control text-center" style="border-radius: 15px;"
+                        name="password" id="" placeholder="Email id" required autocomplete=false>
+                    </div>
+                </div>
+               <hr>
+
+                        <div class="row d-block mx-auto">
+                            {% comment %} <button> Submit </button> {% endcomment %}
+                            <button  id="submit" style="background-color: rgb(3, 3, 76);color: white;font-size: x-large;margin-top: 20px;border-radius: 20px;" type="submit">Register</button>
+                        </div>
+                        </div>
+                        <div>
+                            
+                        </div>
+                    </div>
+                    
                 </form> 
                 
+                </div>
 
             </div>
             
@@ -201,5 +258,6 @@
 
     </div>
 
-</body>
+
+ </body>
 </html>
