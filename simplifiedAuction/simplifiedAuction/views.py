@@ -20,7 +20,9 @@ def login(request):
 
         if(auction):
             request.session["username"] = auction.username
-            return HttpResponseRedirect('/auction/'+auction.username+'/dashboard')    
+            return HttpResponseRedirect('/auction/'+auction.username+'/dashboard')  
+        else:
+            return HttpResponse(content="User Does Not Exists")  
         return HttpResponseRedirect('/')
     else:
         return render(request, "login.html", {})
@@ -50,6 +52,12 @@ def register(request):
         return HttpResponseRedirect('auction/'+request.session.get("id")+'/dashboard')
     
     if request.method == "POST":
+        email = request.POST["email"]
+        password = request.POST["password"]
+        username = request.POST["username"]
+
+        admin = Auction_admin(email=email, password=password, username=username)
+        admin.save()
         return HttpResponseRedirect('/login')
     return render(request, "register.html", {})
 

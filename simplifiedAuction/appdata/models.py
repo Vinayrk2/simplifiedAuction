@@ -6,7 +6,7 @@ import numpy as np
 class Auction_admin(models.Model):
     username = models.CharField(max_length=40)
     # date = models.DateField()
-    email = models.CharField(max_length=100, null=True)
+    email = models.CharField(max_length=100, unique=True)
     password = models.CharField(max_length=128)
 
     def save(self):
