@@ -50,15 +50,18 @@ def myAuctions(request):
 def register(request):
     if request.session.get("username") != None:
         return HttpResponseRedirect('auction/'+request.session.get("id")+'/dashboard')
-    
-    if request.method == "POST":
-        email = request.POST["email"]
-        password = request.POST["password"]
-        username = request.POST["username"]
+    try:
 
-        admin = Auction_admin(email=email, password=password, username=username)
-        admin.save()
-        return HttpResponseRedirect('/login')
+        if request.method == "POST":
+            email = request.POST["email"]
+            password = request.POST["password"]
+            username = request.POST["username"]
+
+            admin = Auction_admin(email=email, password=password, username=username)
+            admin.save()
+            return HttpResponseRedirect('/login')
+    except Exception as r:
+        return HttpResponse(content="User Already exists, please try with another id, or login")
     return render(request, "register.html", {})
 
 def liveAuction(request,auctionid):
@@ -76,4 +79,8 @@ def allAuctions(request):
     else:
         content = "No Auctions organized yet"
     return HttpResponse(content=content)
+
+def logout(request):
+    request.session.clear()
+    return HttpResponseRedirect('/')
 

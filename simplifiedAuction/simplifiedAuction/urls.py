@@ -32,4 +32,5 @@ urlpatterns = [
     path("auction/addplayer", views.addTeam),
     path("<adminid>/myauctions", views.myAuctions),
     path("allauctions", views.allAuctions),
+    path("logout", views.logout),
 ]
