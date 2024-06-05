@@ -99,7 +99,7 @@ def allAuctions(request):
     content = ""
     if len(auctions) != 0:
         for i in auctions:
-            content += auctions.id
+            content += i.auctionName
     else:
         content = "No Auctions organized yet"
     return HttpResponse(content=content)
