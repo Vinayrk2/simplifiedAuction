@@ -117,7 +117,7 @@
         <div class="container d-flex justify-content-center my-5">
             <div class="card" style="width: 20rem;background-color: skyblue;border-radius: 20px;height: auto;">
                 <h2 class="text-center my-3" style="color: rgb(3, 3, 76);font-weight: bold;">Bid <br> Players</h2>
-                <h5 class="text-center text-uppercase">{{ user }} Login</h5>
+                <h5 class="text-center text-uppercase"> Login</h5>
                 <form action="/login" method="post">
                     {% csrf_token %}
                 <div class="card-body ">
@@ -131,7 +131,7 @@
                         <div class="row my-2">
                             <div class="col-sm">
                                 <input type="password" class="form-control form-control-lg text-center my-2" style="border-radius: 15px;"
-                                name="password" id="" placeholder="Password">
+                                name="pwd" id="password" placeholder="Password">
                             </div>
                         </div>
                        <hr>

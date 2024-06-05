@@ -25,6 +25,7 @@ urlpatterns = [
     path("login", views.login),
     path("register", views.register),
     path("auction/<auctionid>/dashboard", views.dashboard),
+    path("auction/<auctionid>/setup", views.auctionsetup),
     path("auction/<auctionid>/live", views.liveAuction),
     path("auction/<auctionid>/final", views.finalAuction),
     path("auction/createauction", views.createAuction),

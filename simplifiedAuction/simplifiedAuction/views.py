@@ -7,23 +7,33 @@ from django.contrib.auth.hashers import make_password
 def dashboard(request, auctionid):
     if request.session.get("username") == None:
         return HttpResponseRedirect('/login')
-    return HttpResponse(content="Hello World")
+    elif request.session.get("username") != auctionid:
+        return HttpResponseRedirect('/')
+    else:
+        auctions = Auction.getAuctionByAdminId(request.session["id"])
+        return render(request, "auction_admin.html", {'auctions':auctions})
 
 def home(request):
     return render(request,"index.html",{})
 
 def login(request):
-    if request.session.get("username") != None:
+    if request.session.get("username"):
         return HttpResponseRedirect('auction/'+request.session.get("id")+'/dashboard')
     if(request.method == "POST"):
-        auction = Auction_admin.objects.get(email=request.POST['email'])
-
-        if(auction):
-            request.session["username"] = auction.username
-            return HttpResponseRedirect('/auction/'+auction.username+'/dashboard')  
+        # try:
+        print(request.POST)
+        email = request.POST.get("email")
+        password = request.POST.get('pwd')
+        admin = Auction_admin.getAdmin(email,password)
+        if(admin):
+            request.session["username"] = admin.username
+            request.session["id"] = admin.id
+            return HttpResponseRedirect('/auction/'+admin.username+'/dashboard')  
         else:
             return HttpResponse(content="User Does Not Exists")  
-        return HttpResponseRedirect('/')
+        # except Exception as e:
+        #     # return HttpResponseRedirect('/')
+        #     return HttpResponse(content=e)
     else:
         return render(request, "login.html", {})
 
@@ -69,6 +79,20 @@ def liveAuction(request,auctionid):
 
 def finalAuction(request,auctionid):
     return HttpResponse(content="Login Page")
+
+def auctionsetup(request,auctionid):
+    auction = Auction.objects.filter(id=auctionid)
+    if(auction):
+        auction = auction[0]
+        if(auction.admin.id != request.session.get("id")):
+            return HttpResponse(content="Unauthorize user")
+        
+    if request.method == "POST":
+        
+        return render(request, "auction_setup.html", {"auction":auction})
+    else:
+        print(auction.admin)
+        return render(request, "auction_setup.html", {"auction":auction})
 
 def allAuctions(request):
     auctions = Auction.getAll()

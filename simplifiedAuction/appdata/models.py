@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.hashers import make_password
+from django.contrib.auth.hashers import make_password, check_password
 import numpy as np
 
 # Create your models here.
@@ -15,8 +15,14 @@ class Auction_admin(models.Model):
     def __str__(self):
         return self.username
     
-    def getAdminData(self):
-        return self
+    @staticmethod
+    def getAdmin(email,password):
+        obj = Auction_admin.objects.filter(email=email)
+        if(len(obj) == 1):
+            obj = obj[0]
+            if(check_password(password, obj.password)):
+                return obj
+        return None
     
 class Auction(models.Model):
     auction = models.CharField(max_length=30, unique=True, null=False)
@@ -37,6 +43,10 @@ class Auction(models.Model):
     @staticmethod
     def getAll():
         return Auction.objects.all()
+    @staticmethod
+    def getAuctionByAdminId(adminid):
+        admin = Auction.objects.filter(admin=adminid)
+        return admin
 
 class AuctionPlayer(models.Model):
     auction = models.ForeignKey('Auction', on_delete=models.CASCADE)
