@@ -28,7 +28,7 @@ def login(request):
         if(admin):
             request.session["username"] = admin.username
             request.session["id"] = admin.id
-            return HttpResponseRedirect('/auction/'+admin.username+'/dashboard')  
+            return HttpResponseRedirect('/auction/'+str(admin.username)+'/dashboard')  
         else:
             return HttpResponse(content="User Does Not Exists")  
         # except Exception as e:
@@ -77,6 +77,11 @@ def register(request):
 def liveAuction(request,auctionid):
     return HttpResponse(content="Login Page")
 
+def viewAuction(request,auctionid):
+    auction = Auction.objects.get(id=auctionid)
+    print(auction)
+    return render(request, "view_auction.html", {'auction':auction})
+
 def finalAuction(request,auctionid):
     return HttpResponse(content="Login Page")
 
@@ -102,7 +107,7 @@ def allAuctions(request):
             content += i.auctionName
     else:
         content = "No Auctions organized yet"
-    return HttpResponse(content=content)
+    return render(request, "all_auction.html",{"auctions":auctions})
 
 def logout(request):
     request.session.clear()

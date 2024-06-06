@@ -28,6 +28,7 @@ urlpatterns = [
     path("auction/<auctionid>/setup", views.auctionsetup),
     path("auction/<auctionid>/live", views.liveAuction),
     path("auction/<auctionid>/final", views.finalAuction),
+    path("auction/<auctionid>/view", views.viewAuction),
     path("auction/<auctionid>/createauction", views.createAuction),
     path("auction/<auctionid>/addteam", views.addPlayer),
     path("auction/<auctionid>/addplayer", views.addTeam),
