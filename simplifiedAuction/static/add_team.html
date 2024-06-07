@@ -139,6 +139,7 @@
     {% include "admin_side_menu.html" %} 
         <div class="d-flex justify-content-between my-4 mx-2">
             <div class="container" style="width: 600px;height: 100%;background-color: white;">
+            
   
                     <h4 class="text-center my-2" style="font-size:25px;font-weight:bold">Add Team Section</h4>
 
@@ -164,23 +165,40 @@
                             </div>
                         </div> -->
                         <div class="container my-2">
-                            
+                            <form enctype="multipart/form-data" action="" method="post">
+                            {% csrf_token %}
                             <div class="row my-2">
                                 <div class="col-sm-4">   
-                                    <label for="Admin_ID" class="form-label" style="color: rgb(3, 3, 76);font-weight: bold;font-size:20px">Player ID :</label> 
+                                    <label for="Admin_ID" class="form-label" style="color: rgb(3, 3, 76);font-weight: bold;font-size:20px">Team Name :</label> 
                                 </div>
                                 <div class="col-sm">
-                                    <input type="text" name="Admin_ID" id="Admin_ID" class="text-center form-control" style="border-radius: 25px;background-color: lightgray;">
+                                    <input type="text" name="name" id="Admin_ID" class="text-center form-control" style="border-radius: 25px;background-color: lightgray;" required>
                                 </div>
                                 
                             </div>
-                            <button class="btn d-block mx-auto my-4" style="background-color: rgb(3, 3, 76);color: white;font-weight: bold;" type="submit">Fetch Player Details</button>
+
+                            <div class="row my-2">
+                                <div class="col-sm-4">   
+                                    <label for="Admin_ID" class="form-label" style="color: rgb(3, 3, 76);font-weight: bold;font-size:20px">Team Logo :</label> 
+                                </div>
+                                <div class="col-sm">
+                                    <input type="file" name="logo" accept="image/*" class="text-center form-control" style="border-radius: 25px;background-color: lightgray;" required>
+                                </div>
+                                
+                            </div>
+                            <button class="btn d-block mx-auto my-4" style="background-color: rgb(3, 3, 76);color: white;font-weight: bold;" type="submit">Add Team</button>
                         </div>
                     </fieldset>
+                </form>
                 </div>
 
                 
 
+    </div>
+    <div class="container mx-3" style="width: 350px;height: 100%;background-color: white;">
+        {% for i in teams %}
+            {{i}}
+        {% endfor %}
     </div>
     </div>
 

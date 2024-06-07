@@ -49,7 +49,37 @@ def addPlayer(request, auctionid):
     if request.session.get("username") == None:
         return HttpResponseRedirect('/login')
     
-    return render(request, "add_player.html", {"auctionid":auctionid})
+    if request.method == "POST":
+        name = request.POST.get("name")
+        category = request.POST.get("category")
+        age = request.POST.get("age")
+        battingStyle = request.POST.get("battingStyle")
+        bowlingStyle = request.POST.get("bowlingStyle")
+        gender = request.POST.get("gender")
+        image = request.FILES['image']
+
+        if name != None and type != None and age != None and battingStyle != None and bowlingStyle != None and gender != None and image != None:
+            player = Player()
+            player.name = name
+            player.category = category
+            player.age = age
+            player.battingStyle = battingStyle 
+            player.bowlingStyle = bowlingStyle
+            player.gender = 1 if gender == "male" else "female"
+            player.image = image
+            player.save()
+
+            auction = Auction.objects.get(id=auctionid)
+            auctionplayer = AuctionPlayer()
+            auctionplayer.player = player
+            auctionplayer.auction = auction
+            auctionplayer.team = None
+            auctionplayer.status= 0
+            auctionplayer.save()
+
+    players = AuctionPlayer.objects.all()
+    
+    return render(request, "add_player.html", {"auctionid":auctionid, "players":players})
 
 def addTeam(request, auctionid):
     if request.session.get("username") == None:

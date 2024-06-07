@@ -149,6 +149,7 @@
                     <hr>
 
                 <div class="d-flex justify-content-start my-5 mx-3">
+                    <form action="" method="post" enctype="multipart/form-data">
                     <fieldset  style="border:3px solid rgb(3, 3, 76); border-radius:8px;width: 100%;">
                         <legend class="text-center">Fetch Player Details</legend>
                         <!-- <div class="row">
@@ -167,45 +168,104 @@
                                 <input type="text" name="Admin_ID" id="Admin_ID" class="" style="border-radius: 25px;background-color: lightgray;">
                             </div>
                         </div> -->
+                        {% csrf_token %}
                         <div class="container my-2">
                             
                             <div class="row my-2">
                                 <div class="col-sm-4">   
                                     <label for="playerName" class="form-label" style="color: rgb(3, 3, 76);font-weight: bold;font-size:20px">Player Name :</label> 
                                 </div>
-                                <div class="col-sm">
-                                    <input type="text" name="playerName" id="playerName" class="text-center form-control" style="border-radius: 25px;background-color: lightgray;">
-                                </div>
+                            
+                            <div class="col-sm">
+                                <input type="text" name="name" id="playerName" class="text-center form-control" style="border-radius: 25px;background-color: lightgray;">
+                            </div>
+                        </div>
                                 
+                            <div class="row my-2">
                                 <div class="col-sm-4">   
                                     <label for="type"  class="form-label" style="color: rgb(3, 3, 76);font-weight: bold;font-size:20px">Player Type :</label> 
                                 </div>
                                 <div class="col-sm">
-                                    <select name="playerType" id="">
+                                    <select name="category" id="">
                                         <option value="Batsman"> Batsman </option>
                                         <option value="Bowler"> Bowler </option>
                                         <option value="Wicketkeeper"> Wicketkeeper </option>
                                         <option value="AllRounder"> All Rounder </option>
                                     </select>
                                 </div>
-                                
+                            </div>
+                            
+                            <div class="row my-2">
                                 <div class="col-sm-4">   
                                     <label for="type"  class="form-label" style="color: rgb(3, 3, 76);font-weight: bold;font-size:20px">Player Age :</label> 
+                            </div>
+                                <div class="col-sm">
+                                    <input type="number" name="age" id="playerAge" class="text-center form-control" style="border-radius: 25px;background-color: lightgray;">
+                                </div>
+                            </div>
+                        
+                            <!-- <div class="row my-2">
+                                <div class="col-sm-4">   
+                                    <label   class="form-label" style="color: rgb(3, 3, 76);font-weight: bold;font-size:20px">Player Age :</label> 
+                                </div>
+
+                                <div class="col-sm">
+                                    <input type="number" name="age" id="playerAge" class="text-center form-control" style="border-radius: 25px;background-color: lightgray;">
+                                </div>
+                            </div> -->
+                                
+                            <div class="row my-2">
+                                <div class="col-sm-4">   
+                                    <label   class="form-label" style="color: rgb(3, 3, 76);font-weight: bold;font-size:20px">Batting Style :</label> 
+                                </div>
+
+                                <div class="col-sm">
+                                    <input type="text" name="battingStyle" id="playerName" class="text-center form-control" style="border-radius: 25px;background-color: lightgray;">
+                                </div>
+                            </div>
+
+                            <div class="row my-2">
+                                <div class="col-sm-4">   
+                                    <label   class="form-label" style="color: rgb(3, 3, 76);font-weight: bold;font-size:20px">Bowling Style :</label> 
+                                </div>
+                            
+                                <div class="col-sm">
+                                    <input type="text" name="bowlingStyle" id="playerName" class="text-center form-control" style="border-radius: 25px;background-color: lightgray;">
+                                </div>
+                            </div>
+
+                            <div class="row my-2">
+                                <div class="col-sm-4">   
+                                    <label   class="form-label" style="color: rgb(3, 3, 76);font-weight: bold;font-size:20px">Gender :</label> 
+                                </div>
+
+                                <div class="col-sm">
+                                    <input type="checkbox" name="gender" id="" value="male" ><b> Male </b> 
+                                    <input type="checkbox" name="gender" id="" value="female"><b> Female </b> 
+                                </div>
+                            </div>
+
+                            <div class="row my-2">
+                                <div class="col-sm-4">
+                                    <label   class="form-label" style="color: rgb(3, 3, 76);font-weight: bold;font-size:20px">Profile Image :</label> 
                                 </div>
                                 <div class="col-sm">
-                                    <input type="number" name="playerAge" id="playerAge" class="text-center form-control" style="border-radius: 25px;background-color: lightgray;">
+                                    <input type="file" name="image" id="" accept="image/*">
                                 </div>
-                                
-                                <div class="col-sm">
-                                    <input type="text" name="playerName" id="playerName" class="text-center form-control" style="border-radius: 25px;background-color: lightgray;">
-                                </div>
-                                
+
+                            </div>
                             </div>
                             <button class="btn d-block mx-auto my-4" style="background-color: rgb(3, 3, 76);color: white;font-weight: bold;" type="submit">Fetch Player Details</button>
                         </div>
                     </fieldset>
+                </form>
                 </div>
-
+        
+            <div class="container mx-3" style="width: 350px;height: 100%;background-color: white;">
+                {% for i in players %}
+                    {{i}}
+                {% endfor %}
+            </div>
                 
 
     </div>

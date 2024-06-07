@@ -58,17 +58,17 @@ class Auction(models.Model):
             "initialPoint": au.initialPoint,
             "maxBid": au.maxBid,
             "location": au.location,
-            "status" : au.status,
+            # "status" : au.status,
         }
         return auction
 
 class AuctionPlayer(models.Model):
     auction = models.ForeignKey('Auction', on_delete=models.CASCADE)
-    player = models.ForeignKey('Player', on_delete=models.CASCADE)
+    player = models.ForeignKey('Player',on_delete=models.CASCADE)
     status = models.SmallIntegerField(default=0)
     team = models.ForeignKey('Team', on_delete=models.DO_NOTHING, null=True, blank=True)
     def __str__(self):
-        return f"{self.auctionId} - {self.playerId}"
+        return f"{self.auction} - {self.player}"
     
     def getRandomPlayer(self):
         players = Player.objects.filter(auction=auction)
@@ -98,7 +98,7 @@ class AuctionPlayer(models.Model):
 
 
 class Player(models.Model):
-    name         = models.CharField(max_length=30)
+    name         = models.CharField(max_length=30, unique=True)
     category     = models.CharField(max_length=50)
     age          = models.IntegerField(null=True)
     battingStyle = models.TextField(null=True, default='')
@@ -114,6 +114,6 @@ class Player(models.Model):
 class Team(models.Model):
     name    = models.CharField(max_length=35)
     logo    = models.ImageField(upload_to="team/",default=None, null=True)
-    captainId = models.OneToOneField('Player', on_delete=models.DO_NOTHING, null=True, default=None)
+    # captainId = models.OneToOneField('Player', on_delete=models.DO_NOTHING, null=True, default=None)
     def __str__(self):
         return self.name
