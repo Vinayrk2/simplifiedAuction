@@ -25,8 +25,8 @@ class Auction_admin(models.Model):
         return None
     
 class Auction(models.Model):
-    auction = models.CharField(max_length=30, unique=True, null=False)
-    auctionName = models.CharField(max_length=50, default='')
+    # auction = models.CharField(max_length=30, unique=True, null=False)
+    auctionName = models.CharField(max_length=50, default='', null=False)
     admin   = models.ForeignKey('Auction_admin', on_delete=models.PROTECT)
     date = models.DateField(auto_now=True)
     initialPoint = models.IntegerField(default=0)
@@ -47,6 +47,20 @@ class Auction(models.Model):
     def getAuctionByAdminId(adminid):
         admin = Auction.objects.filter(admin=adminid)
         return admin
+    
+    @staticmethod
+    def getAuctionInDict(auctionid):
+        au = Auction.objects.filter(id=auctionid)[0]
+        # print(auction)
+        auction = {
+            "auctionName": au.auctionName,
+            "date": au.date,
+            "initialPoint": au.initialPoint,
+            "maxBid": au.maxBid,
+            "location": au.location,
+            "status" : au.status,
+        }
+        return auction
 
 class AuctionPlayer(models.Model):
     auction = models.ForeignKey('Auction', on_delete=models.CASCADE)

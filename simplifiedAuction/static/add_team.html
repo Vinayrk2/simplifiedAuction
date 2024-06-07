@@ -103,7 +103,7 @@
 </style>
 <body>
     <div class="container-fluid d-flex p-0" style="height:830px">
-        <div id="SideBar" class="d-flex flex-column p-5 h-100" style="background-color: white;">
+        <!-- <div id="SideBar" class="d-flex flex-column p-5 h-100" style="background-color: white;">
             <h2 class="text-center " style="color: rgb(3, 3, 76);font-weight: bold;">Bid <br> Players</h2>
             <hr>
             <div style="display: flex;align-items: center;justify-content: center;">
@@ -113,7 +113,7 @@
                             Create Auction
                         </a>
                     </li>
-                    <!-- <li class="nav-item mb-1">
+                    <li class="nav-item mb-1">
                         <a href="auction/{{auctionid}}/addplayer" class="active  text-center" onclick="Add_Teams()">
                             Add Teams
                         </a>
@@ -122,10 +122,10 @@
                         <a href="" class="active  text-center" onclick="Add_Players">
                             Add Player
                         </a>
-                    </li> -->
+                    </li> 
                 </ul>
             </div>
-        </div>
+        </div> -->
 
         <!-- <div class="bg-light flex-fill ">
     <div class="p-2 d-md-none d-flex text-white" style="background-color:white">
@@ -135,10 +135,12 @@
         <span class="ms-3">Bid Player</span>
     
     </div> -->
+
+    {% include "admin_side_menu.html" %} 
         <div class="d-flex justify-content-between my-4 mx-2">
             <div class="container" style="width: 600px;height: 100%;background-color: white;">
   
-                    <h4 class="text-center my-2" style="font-size:25px;font-weight:bold">Add Player Section</h4>
+                    <h4 class="text-center my-2" style="font-size:25px;font-weight:bold">Add Team Section</h4>
 
                     <hr>
 

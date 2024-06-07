@@ -4,10 +4,10 @@ from appdata.models import *
 from django.contrib.auth.hashers import make_password
 
 
-def dashboard(request, auctionid):
+def dashboard(request, adminid):
     if request.session.get("username") == None:
         return HttpResponseRedirect('/login')
-    elif request.session.get("username") != auctionid:
+    elif request.session.get("username") != adminid:
         return HttpResponseRedirect('/')
     else:
         auctions = Auction.getAuctionByAdminId(request.session["id"])
@@ -18,7 +18,7 @@ def home(request):
 
 def login(request):
     if request.session.get("username"):
-        return HttpResponseRedirect('auction/'+request.session.get("id")+'/dashboard')
+        return HttpResponseRedirect('auction/'+request.session.get("username")+'/dashboard')
     if(request.method == "POST"):
         # try:
         print(request.POST)
@@ -28,7 +28,7 @@ def login(request):
         if(admin):
             request.session["username"] = admin.username
             request.session["id"] = admin.id
-            return HttpResponseRedirect('/auction/'+str(admin.username)+'/dashboard')  
+            return HttpResponseRedirect('/auction/'+(admin.username)+'/dashboard')  
         else:
             return HttpResponse(content="User Does Not Exists")  
         # except Exception as e:
@@ -37,26 +37,32 @@ def login(request):
     else:
         return render(request, "login.html", {})
 
-def createAuction(request):
+def createAuction(request,adminid):
     if request.session.get("username") == None:
         return HttpResponseRedirect('/login')
-    return render(request, "create_auction.html", {})
+    if request.method == "POST":
+        return HttpResponseRedirect("/")
+    auction=["auctionName","date","initialPoint","maxBid","location","status"]
+    return render(request, "create_auction.html", {"auction":auction})
 
 def addPlayer(request, auctionid):
     if request.session.get("username") == None:
         return HttpResponseRedirect('/login')
-    return render(request, "create_auction.html", {})
+    
+    return render(request, "add_player.html", {"auctionid":auctionid})
 
 def addTeam(request, auctionid):
     if request.session.get("username") == None:
         return HttpResponseRedirect('/login')
-    return render(request, "create_auction.html", {})
+    return render(request, "add_team.html", {"auctionid":auctionid})
 
-def myAuctions(request):
+def myAuctions(request,adminid):
     if request.session.get("username") == None:
         return HttpResponseRedirect('/login')
-    return render(request, "create_auction.html", {})
-
+    else:
+        auctions = Auction.getAuctionByAdminId(request.session["id"])
+        return render(request, "all_auction.html", {"auctions":auctions})
+      
 def register(request):
     if request.session.get("username") != None:
         return HttpResponseRedirect('auction/'+request.session.get("id")+'/dashboard')
@@ -93,11 +99,19 @@ def auctionsetup(request,auctionid):
             return HttpResponse(content="Unauthorize user")
         
     if request.method == "POST":
-        
-        return render(request, "auction_setup.html", {"auction":auction})
-    else:
-        print(auction.admin)
-        return render(request, "auction_setup.html", {"auction":auction})
+        auction = Auction.objects.get(id=auctionid)
+        auction.auctionName = request.POST.get("auctionName")
+        auction.date = request.POST.get("date")
+        auction.initialPoint = request.POST.get("initialPoint")
+        auction.maxBid = request.POST.get("maxBid")
+        auction.location = request.POST.get("location")
+        auction.status = request.POST.get("status")
+        auction.save()
+        # return render(request, "auction_setup.html", {"auction":auction})
+    # else:
+    auction = Auction.getAuctionInDict(auctionid)
+    # print(auction.admin)
+    return render(request, "auction_setup.html", {"auctionid":auctionid, "auction":auction})
 
 def allAuctions(request):
     auctions = Auction.getAll()

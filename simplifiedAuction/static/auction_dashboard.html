@@ -137,37 +137,25 @@
 </style>
 <body>
     <div class="container-fluid d-flex p-0" style="height:830px">
-        <div id="SideBar" class="d-flex flex-column p-5 h-100" style="background-color: white;">
+        <!-- <div id="SideBar" class="d-flex flex-column p-5 h-100" style="background-color: white;">
             <h2 class="text-center " style="color: rgb(3, 3, 76);font-weight: bold;">Bid <br> Players</h2>
             <hr>
             <div style="display: flex;align-items: center;justify-content: center;">
                 <ul class="mynav nav nav-pills flex-column mb-auto my-4" style="">
                     <li class="nav-item mb-1">
-                        <a href="getform" class="active  text-center btn" onclick="loadForm('auction')">
-                            Create Auction
+                        <a href="/auction/{{ auction.id }}/edit" class="active  text-center btn" >
+                            Edit Auction
                         </a>
                     </li>
                     <li class="nav-item mb-1">
-                        <a  href="addplayer" class="active  text-center"  onclick="loadForm('team')">
+                        <a  href="/auction/{{auction.id}}/addplayer" class="active  text-center" >
                             Add Players
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="addteam" class="active  text-center" onclick="loadForm('player')">
+                        <a href="/auction/{{auction.id}}/addteam" class="active  text-center">
                             Add Teams
                         </a>
-                    </li>
-                    <li class="nav-item">
-                        <form action="/liveauction/" name="auction" method="post">
-                            {% csrf_token %}
-                        <select name="auction" id="" onchange="document.forms['auction'].setAttribute('action',`/liveauction/${this.value}`)">
-                            {% if auctions %}
-                            <option value="" disabled selected> -- Select  Auction to Start -- </option>
-                            {% for auction in auctions %}
-                            <option value="{{ auction.id }}"> {{ auction.auctionName}} </option>
-                            {% endfor %}
-                            {% endif %}
-                        </select>
                     </li>
                     <li class="nav-item" style="background:skyblue">
                         <button class="btn text-center text-dark" style="font-weight:bold"> <b>Start Auction</b> </button>
@@ -177,7 +165,8 @@
                 
         
             </div>
-        </div>
+        </div> -->
+        {% include "admin_side_menu.html" %}
         
 
         <!-- <div class="bg-light flex-fill ">
@@ -191,76 +180,6 @@
         <div class="d-flex justify-content-between my-4 mx-2">
             <div class="container" style="width: 600px;height: 100%;background-color: white;">
   
-                    
-
-                    
-
-                <div class="d-flex justify-content-start my-5 mx-3">
-                    <fieldset  style=" border-radius:8px;width: 100%;">
-                        {% block content %}
-                        
-                        <!-- <div class="row">
-                            <div class="col-sm-6">   
-                                <label for="Admin_ID" class="" style="color: rgb(3, 3, 76);font-weight: bold;">Admin ID :</label> 
-                            </div>
-                            <div class="col-sm-6">
-                                <input type="text" name="Admin_ID" id="Admin_ID" class="" style="border-radius: 25px;background-color: lightgray;">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-6">     
-                                <label for="Admin_ID" class="" style="color: rgb(3, 3, 76);font-weight: bold;">Admin ID :</label>
-                            </div>
-                            <div class="col-sm-6">
-                                <input type="text" name="Admin_ID" id="Admin_ID" class="" style="border-radius: 25px;background-color: lightgray;">
-                            </div>
-                        </div> -->
-                        {% comment %} <div class="container my-2">
-                            
-                            <div class="row my-2">
-                                <div class="col-sm-4">   
-                                    <label for="Admin_ID" class="form-label" style="color: rgb(3, 3, 76);font-weight: bold;font-size:20px">Player ID :</label> 
-                                </div>
-                                <div class="col-sm">
-                                    <input type="text" name="{{ request.session.id  }}" id="Admin_ID" class="text-center form-control" style="border-radius: 25px;background-color: lightgray;">
-                                </div>
-                                
-                            </div>
-                            <button class="btn d-block mx-auto my-4" style="background-color: rgb(3, 3, 76);color: white;font-weight: bold;" type="submit">Fetch Player Details</button>
-                        </div> {% endcomment %}
-                    {% comment %} </fieldset> {% endcomment %}
-                    
-                </div>
-
-                {% comment %} <div class="d-flex justify-content-start my-3 mx-3">
-                    <fieldset  style="border:3px solid rgb(3, 3, 76); border-radius:8px;width: 100%;">
-                        <legend class="text-center">Show Player Details</legend>
-                        <!-- <div class="row">
-                            <div class="col-sm-6">   
-                                <label for="Admin_ID" class="" style="color: rgb(3, 3, 76);font-weight: bold;">Admin ID :</label> 
-                            </div>
-                            <div class="col-sm-6">
-                                <input type="text" name="Admin_ID" id="Admin_ID" class="" style="border-radius: 25px;background-color: lightgray;">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-6">     
-                                <label for="Admin_ID" class="" style="color: rgb(3, 3, 76);font-weight: bold;">Admin ID :</label>
-                            </div>
-                            <div class="col-sm-6">
-                                <input type="text" name="Admin_ID" id="Admin_ID" class="" style="border-radius: 25px;background-color: lightgray;">
-                            </div>
-                        </div> -->
-                        <div class="container my-2">
-                        
-                           
-                        
-                        </div>
-                    </fieldset>
-                </div> {% endcomment %}
-                
-            
-                {% endblock %}
 
             </div>
         </form>

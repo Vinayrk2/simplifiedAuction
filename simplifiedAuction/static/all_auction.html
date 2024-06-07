@@ -24,10 +24,17 @@
                 <p class="card-text">{{ auction.date }}</p>
                 
             </div>
+            {% if "id" in request.session %}
+            <div class="card-footer">
+                <a href="/auction/{{ auction.id }}/setup"><button class="btn btn-warning w-100"> Setup Auction</button></a>
+            </div>
 
+
+            {% else %}
             <div class="card-footer">
                 <a href="/auction/{{ auction.id }}/view"><button class="btn btn-warning w-100"> View Details</button></a>
-            </div>
+                </div>
+            {% endif%}
         </div>
         {% endif %}
 
