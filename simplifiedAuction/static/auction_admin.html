@@ -53,6 +53,21 @@
     <div class="text-center"> No Auctions Organized yet. </div>
     
     {% endif %}
+    <div class="container-fluid pt-4 row gx-4">
+        <div class="card text-white bg-secondary mb-3 mx-2" style="max-width: 18rem;">
+            <div class="card-header">
+               <marquee >Create New Auction Here</marquee>
+            </div>
+            <div class="card-body">
+                <!-- <h5 class="card-title"> Create An Auction</h5> -->
+
+                
+            </div>
+
+            <div class="card-footer">
+                <a href="/auction/{{ request.session.username }}/createauction" style="text-decoration: none; font-weight: bolder; color:black"><button class="btn btn-warning w-100"> Create An Auction</button></a>
+            </div>
+        </div>
 
 </body>
 </html>
