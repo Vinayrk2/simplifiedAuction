@@ -17,6 +17,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 import simplifiedAuction.views as views
+# from .settings import MEDIA_URL, MEDIA_ROOT
+# from django.conf.urls.static import static
 
 
 urlpatterns = [
@@ -34,5 +36,6 @@ urlpatterns = [
     path("auction/<auctionid>/addplayer", views.addPlayer)  ,
     path("<adminid>/myauctions", views.myAuctions),
     path("allauctions", views.allAuctions),
+    path("error/<err>", views.errorHandler),
     path("logout", views.logout),
-]
+] 

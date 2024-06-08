@@ -104,7 +104,7 @@ class Player(models.Model):
     battingStyle = models.TextField(null=True, default='')
     bowlingStyle = models.TextField(null=True, default='')
     gender       = models.SmallIntegerField(null=True)
-    image        = models.ImageField( upload_to="player/", default='', null=True)
+    image        = models.ImageField( upload_to="/player", default='', null=True)
     def __str__(self):
         return self.name
     

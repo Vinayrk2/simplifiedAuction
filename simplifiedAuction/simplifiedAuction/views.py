@@ -2,6 +2,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from appdata.models import *
 from django.contrib.auth.hashers import make_password
+# from .settings import MEDIA_ROOT, MEDIA_URL
 
 
 def dashboard(request, adminid):
@@ -57,27 +58,31 @@ def addPlayer(request, auctionid):
         bowlingStyle = request.POST.get("bowlingStyle")
         gender = request.POST.get("gender")
         image = request.FILES['image']
+        try:
+            if name != None and type != None and age != None and battingStyle != None and bowlingStyle != None and gender != None and image != None:
+                player = Player()
+                player.name = name
+                player.category = category
+                player.age = age
+                player.battingStyle = battingStyle 
+                player.bowlingStyle = bowlingStyle
+                player.gender = 1 if gender == "male" else "female"
+                player.image = image
+                player.save()
 
-        if name != None and type != None and age != None and battingStyle != None and bowlingStyle != None and gender != None and image != None:
-            player = Player()
-            player.name = name
-            player.category = category
-            player.age = age
-            player.battingStyle = battingStyle 
-            player.bowlingStyle = bowlingStyle
-            player.gender = 1 if gender == "male" else "female"
-            player.image = image
-            player.save()
-
-            auction = Auction.objects.get(id=auctionid)
-            auctionplayer = AuctionPlayer()
-            auctionplayer.player = player
-            auctionplayer.auction = auction
-            auctionplayer.team = None
-            auctionplayer.status= 0
-            auctionplayer.save()
+                auction = Auction.objects.get(id=auctionid)
+                auctionplayer = AuctionPlayer()
+                auctionplayer.player = player
+                auctionplayer.auction = auction
+                auctionplayer.team = None
+                auctionplayer.status= 0
+                auctionplayer.save()
+                return HttpResponseRedirect("/auction/{}/addplayer".format(auctionid))
+        except Exception as e:
+            return HttpResponseRedirect("/error/1")
 
     players = AuctionPlayer.objects.all()
+
     
     return render(request, "add_player.html", {"auctionid":auctionid, "players":players})
 
@@ -157,3 +162,10 @@ def logout(request):
     request.session.clear()
     return HttpResponseRedirect('/')
 
+def errorHandler(request,err):
+    errs = {
+        "1":"User Already Exists",
+        "2":"Update is not possible due to mandatiry field deleted",
+        "404":"The page not found"
+    }
+    return render(request, "error.html", {"err":errs[str(err)]})

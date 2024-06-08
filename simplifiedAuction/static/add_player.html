@@ -255,7 +255,7 @@
 
                             </div>
                             </div>
-                            <button class="btn d-block mx-auto my-4" style="background-color: rgb(3, 3, 76);color: white;font-weight: bold;" type="submit">Fetch Player Details</button>
+                            <button class="btn d-block mx-auto my-4" style="background-color: rgb(3, 3, 76);color: white;font-weight: bold;" type="submit">Confirm Player</button>
                         </div>
                     </fieldset>
                 </form>
@@ -263,7 +263,10 @@
         
             <div class="container mx-3" style="width: 350px;height: 100%;background-color: white;">
                 {% for i in players %}
-                    {{i}}
+                    <div class="container">
+                        <img src="{{i.player.image}}" alt="" height="20px" width="20px">
+                        {{i.player.name}}
+                    </div>
                 {% endfor %}
             </div>
                 
