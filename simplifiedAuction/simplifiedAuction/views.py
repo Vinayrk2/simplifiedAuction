@@ -89,7 +89,21 @@ def addPlayer(request, auctionid):
 def addTeam(request, auctionid):
     if request.session.get("username") == None:
         return HttpResponseRedirect('/login')
-    return render(request, "add_team.html", {"auctionid":auctionid})
+    
+    auction = Auction.objects.get(id=auctionid)
+    if request.method == "POST":
+        name = request.POST.get("name")
+        logo = request.FILES['logo']
+
+        team = Team()
+        team.name = name
+        team.logo = logo
+        team.auction = auction
+        team.save()
+
+        return HttpResponseRedirect("/auction/{}/addteam".format(auctionid))
+    teams = Team.objects.filter(auction = auction)
+    return render(request, "add_team.html", {"auctionid":auctionid, "teams":teams})
 
 def myAuctions(request,adminid):
     if request.session.get("username") == None:
@@ -116,8 +130,27 @@ def register(request):
     return render(request, "register.html", {})
 
 def liveAuction(request,auctionid):
-    return HttpResponse(content="Login Page")
+    auction = Auction.objects.get(id=auctionid)
 
+    if request.session.get("id") == auction.admin.id:
+        if auction.status == 0:
+            auction.startAuction()
+            auction.save()
+        elif auction.status == 1:
+            return render(request, "live_auction.html", {"auction":auction})
+        elif auction.status == 2:
+            return HttpResponseRedirect("/auction/{}/final".format(auctionid))
+        else:
+            return HttpResponseRedirect("/auction/{}/final".format(auctionid))
+    # auction = Auction.objects.get(id=auctionid)
+
+    if auction.status == 1:
+        return render(request, "live_auction.html", {"auction":auction})
+    elif auction.status == 2:
+        return HttpResponseRedirect("/auction/{}/final".format(auctionid))
+    else:
+        return HttpResponseRedirect("/auction/{}/dashboard".format(auctionid))
+    
 def viewAuction(request,auctionid):
     auction = Auction.objects.get(id=auctionid)
     print(auction)

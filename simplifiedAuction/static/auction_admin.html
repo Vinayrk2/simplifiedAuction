@@ -34,18 +34,34 @@
 
         <!-- card for done or completed auctions   -->
         {% if auction.status == 1 %}
-        <div class="card text-white bg-dark mb-3 mx-2" style="max-width: 18rem;">
+        <div class="card text-white bg-primary mb-3 mx-2" style="max-width: 18rem;">
             <div class="card-header">
-                Completed
+                In Progress
             </div>
             <div class="card-body">
                 <h5 class="card-title">{{ auction.name }}</h5>
                 <p class="card-text">{{ auction.date }}</p>
             </div>
             <div class="card-footer">
-                <button class="btn btn-warning w-100"> Quick Checkout </button>
+               <a href="/auction/{{auction.id}}/live"> <button class="btn btn-warning w-100"> Quick Checkout </button> </a>
             </div>
         </div>
+    </div>
+    {% endif %}
+
+    {% if auction.status == 2 %}
+    <div class="card text-white bg-dark mb-3 mx-2" style="max-width: 18rem;">
+        <div class="card-header">
+            Completed
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">{{ auction.name }}</h5>
+            <p class="card-text">{{ auction.date }}</p>
+        </div>
+        <div class="card-footer">
+        <a href="/auction/{{auction.id}}/final"></a> <button class="btn btn-warning w-100"> Quick Checkout </button>
+        </div>
+    </div>
     </div>
     {% endif %}
     {% endfor %}

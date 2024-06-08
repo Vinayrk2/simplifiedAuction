@@ -104,7 +104,7 @@ class Player(models.Model):
     battingStyle = models.TextField(null=True, default='')
     bowlingStyle = models.TextField(null=True, default='')
     gender       = models.SmallIntegerField(null=True)
-    image        = models.ImageField( upload_to="/player", default='', null=True)
+    image        = models.ImageField( upload_to="player", default='', null=True)
     def __str__(self):
         return self.name
     
@@ -112,8 +112,9 @@ class Player(models.Model):
     
 
 class Team(models.Model):
-    name    = models.CharField(max_length=35)
+    name    = models.CharField(max_length=35, unique=True)
     logo    = models.ImageField(upload_to="team/",default=None, null=True)
+    auction = models.ForeignKey('Auction', on_delete=models.CASCADE, default=None)
     # captainId = models.OneToOneField('Player', on_delete=models.DO_NOTHING, null=True, default=None)
     def __str__(self):
         return self.name

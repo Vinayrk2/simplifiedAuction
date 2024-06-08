@@ -24,7 +24,10 @@
                 </a>
             </li>
             <li class="nav-item" style="background:skyblue">
+                <form action="/auction/{{auctionid}}/live" method="post">
+                    {% csrf_token %}
                 <button class="btn text-center text-dark" style="font-weight:bold"> <b>Start Auction</b> </button>
+            </form>
             </li>
         </form>
         </ul>
