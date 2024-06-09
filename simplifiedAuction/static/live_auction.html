@@ -176,7 +176,7 @@
         </div>
         {% endif %}
         {% endif %}
-
+        
 
         <div class="p-2">
             <a href="/auction/{{ auction.id }}/players" style="padding: 15px;text-align: center;color: rgb(3,3,76);font-weight: bold;font-size: 18px;">All Players</a>
@@ -190,13 +190,13 @@
         </div>
         </div>
         {% if auction.status == 1 %}
-        <form action="" method="post">
+
             {% csrf_token %}
         <div class="container" style="display: flex;justify-content: center;align-items: center;margin-top: 30px;">
             <div class="card" style="width: 100rem;height: 24rem;background-color: lightgray;border-radius: 25px;">
                 <div class="row my-2 mx-2">
                     <div class="col-sm-5">
-                        <img src="/{{ player.image }}" alt="" style="border-radius: 50%;width: 480px;border: 5px solid rgb(3, 3, 76);">
+                        <img src="/{{ player.image }}" class="border border-rounded" alt="" style="height:360px; width: 360px; border: 5px solid rgb(3, 3, 76);">
                     </div>
                     <div class="col-sm-7">
                     <div class="container my-3">
@@ -207,7 +207,7 @@
                          </div>
                          <div class="row">
                             <div class="col">
-                                <h2 style="font-size: 40px;padding: 15px;background-color: skyblue;text-align: center;border-radius:10px;color: rgb(3, 3, 76);font-weight: bold;">{{player.role}}</h2>
+                                <h2 style="font-size: 40px;padding: 15px;background-color: skyblue;text-align: center;border-radius:10px;color: rgb(3, 3, 76);font-weight: bold;">{{player.category}}</h2>
                             </div>
                          </div>
                          <div class="row">
@@ -272,56 +272,49 @@
                         <!-- <input type="number" id="amount" placeholder="Points" class="form-control text-center" style="width: 295px;padding: 15px;"> -->
                     </div>
                 </div>
-                {% if 'user' in request.session and request.session.user == 2 %}
-                <div class="row my-5">
-                    <div class="col-sm-2">
-                        <button class="btn" style="padding: 15px;background-color: skyblue;width: 295px;color: rgb(3, 3, 76);font-weight: bold;">Bid</button>
-                    </div>
-                </div>
-                {% endif %}
             </div>
         </div>
+        <form action="/auction/{{auction.id}}/sold" method="post">
 
-        <div class="col-sm"></div>
-       
-
+        <!-- <div class="col-sm"></div>
+        -->
+            {% csrf_token %}
             {% if player %}
-                <input type="hidden" name="player" value="{{ player.id }}">
+                <input type="hidden" name="playerid" value="{{ player.id }}">
             {% endif %}
+            <div style="width:90vw;" class="row d-flex justify-content-between  mb-5 mx-3">
             
-            <div class="col-sm" style="margin-left: 100px;">
-            <div class="container my-5">
-                <div class="row">
-                    <div class="col-sm-2">
-                        <input type="number" name="bid" id="amount" placeholder="Points" class="form-control text-center" style="width: 295px;padding: 15px;">
-                        <!-- <input type="text" disabled placeholder="Team" class="form-control text-center" style="padding: 15px;width: 610px;"> -->
-                    </div>
+            <!-- <div class="col col-5" style="margin-left: 100px;"> -->
+            <!-- <div class="container my-5"> -->
+                <div class="col col-3 ">
+                    <input type="number" name="bid" id="amount" placeholder="Points" class="form-control text-center" style="width:1-0%;">
+                    <!-- <input type="text" disabled placeholder="Team" class="form-control text-center" style="padding: 15px;width: 610px;"> -->
                 </div>
+                
 
-                <div class="row my-5">
-                    <div class="col-sm">
-                       <select name="team" id="" class="form-select">
+                <div class="col col-3  d-flex justify-content-around  mx-3 ">
+                    <select name="teamid" id="" class="form-select" style="width:100%;">
                         {% if teams %}
-                        {% for team in teams %}
-                        <option value="{{team.id}}"> {{team.name}}</option>
-                        {% endfor %}
+                            {% for team in teams %}
+                                <option value="{{team.id}}"> {{team.name}}</option>
+                            {% endfor %}
                         {% endif %}
                     </select>
                 </div>
-                <div class="col-sm">
-                    <button class="btn" style="padding: 15px;background-color: skyblue;width: 265px;color: rgb(3, 3, 76);font-weight: bold;margin-left: 20px;">Sold</button>
+                <div class="col col-3 d-flex justify-content-around  mx-3">
+                    <button class="btn btn-primary text-dark" style="width: 190%;">Sold</button>
                 </div>
-            </div>
-            </div>
+
         </div>
-        </form>
-        {% endif %}
-        {% if auction.status == 2 %}
-            <a href="/auctiondone/{{auction.id}}"> See Results </a>
-        {% endif %}
-    </div>  
-        
     </div>
+    </form>
+{% endif %}
+{% if auction.status == 2 %}
+<a href="/auctiondone/{{auction.id}}"> See Results </a>
+{% endif %}
+</div>  
+
+</div>
 
 </body>
 

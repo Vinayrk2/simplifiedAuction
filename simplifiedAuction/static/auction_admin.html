@@ -13,7 +13,7 @@
     <!-- Card for the arriving or remaining auctions -->
 
     <div class="container-fluid pt-4 row gx-4 d-flex justify-content-around">
-        <div class="card text-white bg-secondary mb-3 mx-2" style="max-width: 18rem;">
+        <div class="card text-white bg-dark mb-3 mx-2" style="max-width: 18rem;">
             <div class="card-header">
                <marquee >Create New Auction Here</marquee>
             </div>
@@ -44,10 +44,10 @@
     {% if auction.status == 0 %}
         <div class="card col col-3 text-white bg-secondary mb-3 mx-2" style="max-width: 18rem;">
             <div class="card-header">
-                In Progress
+                In Preparation
             </div>
             <div class="card-body">
-                <h5 class="card-title">{{ auction.auctionName }}</h5>
+                <h5 class="card-text text-light">{{ auction}}</h5>
                 <p class="card-text">{{ auction.date }}</p>
                 
             </div>
@@ -66,7 +66,7 @@
             <div class="row mb-3 ">
                 <div class="card text-center bg-primary">
                     <!-- <div class="card-body"> -->
-                      <h5 class="card-title fw-bolder text-light">Auctions In Progress</h5>
+                      <h5 class="card-title fw-bolder text-light">Live Auctions</h5>
                     <!-- </div> -->
                   </div>
             </div>
@@ -74,10 +74,11 @@
         {% if auction.status == 1 %}
         <div class="card col col-3 text-white bg-primary mb-3 mx-2" style="max-width: 18rem;">
             <div class="card-header">
-                In Progress
+                <div class="spinner-grow text-danger" style="height: 10px; width:10px;" role="status"></div>
+                <span style="margin-left: 5px;"> Live </span>
             </div>
             <div class="card-body">
-                <h5 class="card-title">{{ auction.name }}</h5>
+                <h5 class="card-title">{{ auction.auctionName}}</h5>
                 <p class="card-text">{{ auction.date }}</p>
             </div>
             <div class="card-footer">
@@ -103,11 +104,11 @@
             Completed
         </div>
         <div class="card-body">
-            <h5 class="card-title">{{ auction.name }}</h5>
+            <h5 class="card-title">{{ auction.auctionName }}</h5>
             <p class="card-text">{{ auction.date }}</p>
         </div>
         <div class="card-footer">
-        <a href="/auction/{{auction.id}}/final"></a> <button class="btn btn-warning w-100"> Quick Checkout </button>
+        <a href="/auction/{{auction.id}}/final"> <button class="btn btn-warning w-100"> Quick Checkout </button></a>
         </div>
     </div>
     </div>

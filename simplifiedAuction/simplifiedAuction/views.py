@@ -155,12 +155,18 @@ def liveAuction(request,auctionid):
             if request.method == "POST":
                 if request.POST.get("random"):
                     player = AuctionPlayer.getRandomPlayer(auction)
+
+                    if(player == None):
+                        auction.endAuction()
+                        auction.save()
+                        return HttpResponseRedirect('/auction/{}/final'.format(auctionid))
     
                     return HttpResponseRedirect("/auction/{}/live?player={}".format(auctionid,player.id))
                     # return render(request, "live_auction.html", {"auction":auction, "player":player})
             print("Without player and team")
-            player = Player.objects.filter(id= int(request.GET.get("player"))) if request.GET.get("player") != None else None
+            player = Player.objects.filter(id= int(request.GET.get("player")))[0] if request.GET.get("player") != None else None
             teams = Team.objects.filter(auction=auction)
+            # player = Player.objects.get(id=1)
             print(player, teams)
             return render(request, "live_auction.html", {"auction":auction, "player":player, "teams": teams})
         elif auction.status == 2:
@@ -180,6 +186,19 @@ def viewAuction(request,auctionid):
     auction = Auction.objects.get(id=auctionid)
     print(auction)
     return render(request, "view_auction.html", {'auction':auction})
+
+def soldPlayer(request,auctionid):
+    auction = Auction.objects.get(id=auctionid)
+    if request.method == "POST":
+        pId = int(request.POST.get("playerid"))
+        tId = int(request.POST.get("teamid"))
+        team = Team.objects.get(id=tId)
+        player = Player.objects.get(id=pId)
+        player = AuctionPlayer.objects.filter(player = player)[0]
+        player.status = 1
+        player.team = team
+        player.save()
+    return HttpResponseRedirect("/auction/{}/live".format(auctionid))
 
 def playerSummery(request,auctionid):
     auction = Auction.objects.get(id=auctionid)

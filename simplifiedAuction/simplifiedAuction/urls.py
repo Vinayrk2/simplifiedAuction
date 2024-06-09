@@ -34,6 +34,7 @@ urlpatterns = [
     path("auction/<auctionid>/view", views.viewAuction),
     path("auction/<auctionid>/addteam", views.addTeam),
     path("auction/<auctionid>/addplayer", views.addPlayer),
+    path("auction/<auctionid>/sold", views.soldPlayer),
     path("auction/<auctionid>/players", views.playerSummery),
     path("<adminid>/myauctions", views.myAuctions),
     path("allauctions", views.allAuctions),
