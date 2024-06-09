@@ -58,7 +58,7 @@ ROOT_URLCONF = 'simplifiedAuction.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [ BASE_DIR / 'static',  BASE_DIR / 'stylesheet' ],
+        'DIRS': [ BASE_DIR / 'static',  BASE_DIR / 'stylesheet', BASE_DIR ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -119,7 +119,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_URL = 'player/'
+STATIC_URL = 'static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
@@ -127,6 +127,5 @@ STATIC_URL = 'player/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 STATICFILES_DIRS = [
-    BASE_DIR / "player",
     BASE_DIR / "static",
 ]

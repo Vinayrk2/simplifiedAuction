@@ -11,11 +11,38 @@
 <body>
     {% include "header.html" %}
     <!-- Card for the arriving or remaining auctions -->
+
+    <div class="container-fluid pt-4 row gx-4 d-flex justify-content-around">
+        <div class="card text-white bg-secondary mb-3 mx-2" style="max-width: 18rem;">
+            <div class="card-header">
+               <marquee >Create New Auction Here</marquee>
+            </div>
+            <div class="card-body">
+                <!-- <h5 class="card-title"> Create An Auction</h5> -->
+
+                
+            </div>
+
+            <div class="card-footer">
+                <a href="/auction/{{ request.session.username }}/createauction" style="text-decoration: none; font-weight: bolder; color:black"><button class="btn btn-warning w-100 fw-bold"  > Create An Auction</button></a>
+            </div>
+        </div>
+
     {% if auctions %}
+
+    
+    <div class="container-fluid pt-4 row gx-4 bg-transparent my-4">
+    <div class="row mb-3 d-flex justify-content-center" style="height:inherit">
+        <div class="card text-center bg-secondary">
+            <!-- <div class="card-body"> -->
+              <h5 class="card-title fw-bolder text-light">Auctions for Setup</h5>
+            <!-- </div> -->
+          </div>
+    </div>
+
     {% for auction in auctions %}
     {% if auction.status == 0 %}
-    <div class="container-fluid pt-4 row gx-4">
-        <div class="card text-white bg-secondary mb-3 mx-2" style="max-width: 18rem;">
+        <div class="card col col-3 text-white bg-secondary mb-3 mx-2" style="max-width: 18rem;">
             <div class="card-header">
                 In Progress
             </div>
@@ -28,13 +55,24 @@
             <div class="card-footer">
                 <a href="/auction/{{ auction.id }}/setup"><button class="btn btn-warning w-100"> Set Up </button></a>
             </div>
-        </div>
+            </div>
         {% endif %}
-
+        {% endfor %}
+        </div>
+        
 
         <!-- card for done or completed auctions   -->
+        <div class="container-fluid pt-4 row gx-4 bg-transparent">
+            <div class="row mb-3 ">
+                <div class="card text-center bg-primary">
+                    <!-- <div class="card-body"> -->
+                      <h5 class="card-title fw-bolder text-light">Auctions In Progress</h5>
+                    <!-- </div> -->
+                  </div>
+            </div>
+        {% for auction in auctions %}
         {% if auction.status == 1 %}
-        <div class="card text-white bg-primary mb-3 mx-2" style="max-width: 18rem;">
+        <div class="card col col-3 text-white bg-primary mb-3 mx-2" style="max-width: 18rem;">
             <div class="card-header">
                 In Progress
             </div>
@@ -46,9 +84,19 @@
                <a href="/auction/{{auction.id}}/live"> <button class="btn btn-warning w-100"> Quick Checkout </button> </a>
             </div>
         </div>
-    </div>
     {% endif %}
+    {% endfor %}
+    </div>
 
+    <div class="container-fluid pt-4 row gx-4">
+        <div class="row mb-3 ">
+            <div class="card text-center bg-danger">
+                <!-- <div class="card-body"> -->
+                  <h5 class="card-title fw-bolder text-light">Completed Auctions </h5>
+                <!-- </div> -->
+              </div>
+        </div>
+    {% for auction in auctions %}
     {% if auction.status == 2 %}
     <div class="card text-white bg-dark mb-3 mx-2" style="max-width: 18rem;">
         <div class="card-header">
@@ -65,25 +113,14 @@
     </div>
     {% endif %}
     {% endfor %}
+    </div>
+
+
     {% else %}
     <div class="text-center"> No Auctions Organized yet. </div>
     
     {% endif %}
-    <div class="container-fluid pt-4 row gx-4">
-        <div class="card text-white bg-secondary mb-3 mx-2" style="max-width: 18rem;">
-            <div class="card-header">
-               <marquee >Create New Auction Here</marquee>
-            </div>
-            <div class="card-body">
-                <!-- <h5 class="card-title"> Create An Auction</h5> -->
 
-                
-            </div>
-
-            <div class="card-footer">
-                <a href="/auction/{{ request.session.username }}/createauction" style="text-decoration: none; font-weight: bolder; color:black"><button class="btn btn-warning w-100"> Create An Auction</button></a>
-            </div>
-        </div>
 
 </body>
 </html>

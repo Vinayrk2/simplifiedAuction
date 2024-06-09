@@ -162,21 +162,24 @@
     </nav>
     
     <div class="d-flex flex-row-reverse bg-light text-white">
-        {% if request.session.user == 1 and auction.status == 1%}
+        {% if request.session.id and auction.status == 1%}
         {% if auction.status == 1 %}
         <div class="p-2">
             <form action="" method="post">
                 <input type="hidden" name="random" value="true">
                 {% csrf_token %}
-                <button> Get RAndom Player</button>
+                <button class="btn btn-warning" type="submit"> Get RAndom Player</button>
             </form>
+        </div>
+        <div class="text-dark">
+            Max Bid : {{auction.maxBid}}
         </div>
         {% endif %}
         {% endif %}
 
 
         <div class="p-2">
-            <a href="/playersummery/{{ auction.id }}/all" style="padding: 15px;text-align: center;color: rgb(3,3,76);font-weight: bold;font-size: 18px;">All Players</a>
+            <a href="/auction/{{ auction.id }}/players" style="padding: 15px;text-align: center;color: rgb(3,3,76);font-weight: bold;font-size: 18px;">All Players</a>
         </div>
         <div class="p-2">
             <a href="/playersummery/{{ auction.id }}/unsold" style="border-right: 5px solid rgb(3,3,76);padding: 18px;color: rgb(3,3,76);font-weight: bold;font-size: 18px;margin-right: 5px;">Unsold List</a>
@@ -193,7 +196,7 @@
             <div class="card" style="width: 100rem;height: 24rem;background-color: lightgray;border-radius: 25px;">
                 <div class="row my-2 mx-2">
                     <div class="col-sm-5">
-                        <img src="{{profile.image}}" alt="" style="border-radius: 50%;width: 480px;border: 5px solid rgb(3, 3, 76);">
+                        <img src="/{{ player.image }}" alt="" style="border-radius: 50%;width: 480px;border: 5px solid rgb(3, 3, 76);">
                     </div>
                     <div class="col-sm-7">
                     <div class="container my-3">

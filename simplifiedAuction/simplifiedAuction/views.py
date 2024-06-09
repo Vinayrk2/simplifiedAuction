@@ -1,8 +1,8 @@
 from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from appdata.models import *
 from django.contrib.auth.hashers import make_password
-# from .settings import MEDIA_ROOT, MEDIA_URL
+from .settings import BASE_DIR
 
 
 def dashboard(request, adminid):
@@ -42,8 +42,22 @@ def createAuction(request,adminid):
     if request.session.get("username") == None:
         return HttpResponseRedirect('/login')
     if request.method == "POST":
-        return HttpResponseRedirect("/")
-    auction=["auctionName","date","initialPoint","maxBid","location","status"]
+        try:
+            auctionName = request.POST.get("auctionName")
+            date = request.POST.get("date")
+            initialPoint = request.POST.get("initialPoint")
+            maxBid = request.POST.get("maxBid")
+            location = request.POST.get("location")
+
+            auction = Auction(auctionName=auctionName, date=date, initialPoint=initialPoint, maxBid=maxBid, location=location)
+            auction.status = 0
+            admin = Auction_admin.objects.get(id=request.session.get("id"))
+            auction.admin = admin
+            auction.save()
+            return HttpResponseRedirect("/auction/{}/dashboard".format(request.session.get("username")))
+        except Exception as e:
+            return HttpResponseRedirect("/error/2")
+    auction=["auctionName","date","initialPoint","maxBid","location"]
     return render(request, "create_auction.html", {"auction":auction})
 
 def addPlayer(request, auctionid):
@@ -80,9 +94,8 @@ def addPlayer(request, auctionid):
                 return HttpResponseRedirect("/auction/{}/addplayer".format(auctionid))
         except Exception as e:
             return HttpResponseRedirect("/error/1")
-
-    players = AuctionPlayer.objects.all()
-
+    auction = Auction.objects.get(id=auctionid)
+    players = AuctionPlayer.objects.filter(auction=auction)
     
     return render(request, "add_player.html", {"auctionid":auctionid, "players":players})
 
@@ -131,13 +144,25 @@ def register(request):
 
 def liveAuction(request,auctionid):
     auction = Auction.objects.get(id=auctionid)
+    player = None
+    teams = None
 
     if request.session.get("id") == auction.admin.id:
         if auction.status == 0:
             auction.startAuction()
             auction.save()
         elif auction.status == 1:
-            return render(request, "live_auction.html", {"auction":auction})
+            if request.method == "POST":
+                if request.POST.get("random"):
+                    player = AuctionPlayer.getRandomPlayer(auction)
+    
+                    return HttpResponseRedirect("/auction/{}/live?player={}".format(auctionid,player.id))
+                    # return render(request, "live_auction.html", {"auction":auction, "player":player})
+            print("Without player and team")
+            player = Player.objects.filter(id= int(request.GET.get("player"))) if request.GET.get("player") != None else None
+            teams = Team.objects.filter(auction=auction)
+            print(player, teams)
+            return render(request, "live_auction.html", {"auction":auction, "player":player, "teams": teams})
         elif auction.status == 2:
             return HttpResponseRedirect("/auction/{}/final".format(auctionid))
         else:
@@ -145,7 +170,7 @@ def liveAuction(request,auctionid):
     # auction = Auction.objects.get(id=auctionid)
 
     if auction.status == 1:
-        return render(request, "live_auction.html", {"auction":auction})
+        return render(request, "live_auction.html", {"auction":auction,"player":"Player not set"})
     elif auction.status == 2:
         return HttpResponseRedirect("/auction/{}/final".format(auctionid))
     else:
@@ -155,6 +180,15 @@ def viewAuction(request,auctionid):
     auction = Auction.objects.get(id=auctionid)
     print(auction)
     return render(request, "view_auction.html", {'auction':auction})
+
+def playerSummery(request,auctionid):
+    auction = Auction.objects.get(id=auctionid)
+    auctionPlayer = AuctionPlayer.objects.filter(auction=auction)
+    players = []
+    print(BASE_DIR)
+    for i in auctionPlayer:
+        players.append(i.player)
+    return render(request, "player_summery.html", {"players":players})
 
 def finalAuction(request,auctionid):
     return HttpResponse(content="Login Page")
@@ -173,7 +207,7 @@ def auctionsetup(request,auctionid):
         auction.initialPoint = request.POST.get("initialPoint")
         auction.maxBid = request.POST.get("maxBid")
         auction.location = request.POST.get("location")
-        auction.status = request.POST.get("status")
+        # auction.status = request.POST.get("status")
         auction.save()
         # return render(request, "auction_setup.html", {"auction":auction})
     # else:

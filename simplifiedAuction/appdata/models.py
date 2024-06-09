@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.hashers import make_password, check_password
 import numpy as np
+from simplifiedAuction.settings import BASE_DIR
 
 # Create your models here.
 class Auction_admin(models.Model):
@@ -70,22 +71,20 @@ class AuctionPlayer(models.Model):
     def __str__(self):
         return f"{self.auction} - {self.player}"
     
-    def getRandomPlayer(self):
-        players = Player.objects.filter(auction=auction)
+    @staticmethod
+    def getRandomPlayer(auction):
+        players = AuctionPlayer.objects.filter(auction=auction).filter(status=0)
         count = players.count()
-
+        
         if(count == 0):
+            print("Auction must end")
             return None
-        flag = 0
+        
         player = None
-        auctionPlayer = None 
+        randomIndex = np.random.randint(0,count)
+        auctionplayer = players[randomIndex]
+        player = auctionplayer.player
 
-        while(flag != 1):
-            randomIndex = np.random.randint(0,count)
-            player = players[randomIndex]
-            auctionPlayer = AuctionPlayer.objects.get(player = player)
-            if(auctionPlayer.status == 0):
-                flag = 1
 
         return player
     
@@ -104,7 +103,7 @@ class Player(models.Model):
     battingStyle = models.TextField(null=True, default='')
     bowlingStyle = models.TextField(null=True, default='')
     gender       = models.SmallIntegerField(null=True)
-    image        = models.ImageField( upload_to="player", default='', null=True)
+    image        = models.ImageField( upload_to= "static/player/", default='', null=True)
     def __str__(self):
         return self.name
     
@@ -113,7 +112,7 @@ class Player(models.Model):
 
 class Team(models.Model):
     name    = models.CharField(max_length=35, unique=True)
-    logo    = models.ImageField(upload_to="team/",default=None, null=True)
+    logo    = models.ImageField(upload_to=BASE_DIR / "team",default=None, null=True)
     auction = models.ForeignKey('Auction', on_delete=models.CASCADE, default=None)
     # captainId = models.OneToOneField('Player', on_delete=models.DO_NOTHING, null=True, default=None)
     def __str__(self):
