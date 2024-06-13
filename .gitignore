@@ -1,6 +1,6 @@
 .venv
 _pychache_
 migrations
-player/*
+simplifiedAuction/static/player/
 image/
 team/
