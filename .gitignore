@@ -1,7 +1,6 @@
 .venv
 _pychache_
 migrations
-imgs/
 player/
 image/
 team/
