@@ -109,7 +109,7 @@ def addTeam(request, auctionid):
         logo = request.FILES['logo']
 
         team = Team()
-        team.name = name
+        team.name = name + auctionid
         team.logo = logo
         team.auction = auction
         team.save()

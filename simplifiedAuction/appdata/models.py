@@ -112,8 +112,19 @@ class Player(models.Model):
 
 class Team(models.Model):
     name    = models.CharField(max_length=35, unique=True)
-    logo    = models.ImageField(upload_to=BASE_DIR / "team",default=None, null=True)
+    logo    = models.ImageField(upload_to="static/team/",default=None, null=True)
     auction = models.ForeignKey('Auction', on_delete=models.CASCADE, default=None)
     # captainId = models.OneToOneField('Player', on_delete=models.DO_NOTHING, null=True, default=None)
     def __str__(self):
-        return self.name
+        return returnNameOnly(self.name)
+    
+def returnNameOnly(name):
+    result = ""
+
+    for i in name:
+        if i in str(range(0,10)):
+            break
+        result += i
+    print(result)
+    print(7 == '7')
+    return result
